@@ -288,7 +288,10 @@ var JANE_URL = "https://nutritionbydaynak.janeapp.com/";
   // a big plate rolls into every booking section
   $$(".book").forEach(function (b) {
     var p = $(".book__plate", b); if (!p) return;
-    gsap.fromTo(p, { xPercent: 70, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: b, start: "top 95%", end: "top 25%", scrub: true } });
+    // on phones and tablets the plate stays on the centre line and grows in (a sideways move would drift, because the plate is also turning); on wide screens it rolls in from the side
+    var small = window.innerWidth <= 980;
+    gsap.fromTo(p, small ? { scale: .78, autoAlpha: 0 } : { xPercent: 70, autoAlpha: 0 }, small ? { scale: 1, autoAlpha: 1, ease: "none",
+      scrollTrigger: { trigger: b, start: "top 95%", end: "top 25%", scrub: true } } : { xPercent: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: b, start: "top 95%", end: "top 25%", scrub: true } });
   });
 
   if (fine) {
