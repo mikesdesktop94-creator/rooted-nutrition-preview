@@ -537,3 +537,6 @@ svg { width: 1em; height: 1em; }
 }
 /* the vine hugs the left edge of the screen */
 .root { left: clamp(10px, 1.6vw, 34px); }
+
+/* phones and tablets: product cards in the swipe row are centred like everything else */
+@media (max-width: 980px) { .shop__rail .prod { text-align: center; } }
